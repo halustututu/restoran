@@ -1,58 +1,98 @@
-/* Styling dasar (GLOBAL/DEFAULT - Untuk layar lebih besar dari 480px) */
+/* Styling dasar (GLOBAL/DEFAULT - Untuk layar desktop besar) */
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     min-height: 100vh;
-    position: relative; 
+    position: relative; /* Container untuk elemen position: absolute */
     background-color: #f0f0f0; 
 }
 
-/* Penengahan global untuk kedua elemen */
-.rectangle-7, .new-rectangle {
-    position: absolute;
-    left: 50%; 
-    transform: translateX(-50%); 
-}
+/* ================================== */
+/* 💻 STYLES DESKTOP (DEFAULT) - Menggunakan position: absolute */
+/* ================================== */
 
-/* Default Styles (Saat TIDAK memenuhi kriteria Mobile) */
+/* .rectangle-7 */
 .rectangle-7 {
-    width: 467px; /* Lebar Asli */
-    height: 153px; /* Tinggi Asli */
-    top: 0px; 
-    background-color: #D9D9D9; 
+    width: 467px; height: 153px; top: 0px; left: 50%; 
+    transform: translateX(-50%); position: absolute; background-color: #D9D9D9; 
     background-image: url('background-image.jpg'); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-size: cover; background-repeat: no-repeat; background-position: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+/* .new-rectangle */
 .new-rectangle {
-    width: 467px; /* Lebar Asli (Disamakan) */
-    height: 327px; /* Dihitung ulang agar proporsi 70/100 tetap terjaga */
-    top: 180px; /* Jarak default dari atas */
-    border: 1px solid black; 
+    position: absolute; top: 221px; left: 138px; 
+    transform: translate(475%, -50%); width: 100px; height: 70px;
+    border: 1px solid black; opacity: 1; 
     background-color: rgba(255, 165, 0, 0.7);
+    background-image: url('background-image1.jpg'); 
 }
 
-/* ================================== */
-/* MEDIA QUERY: Gaya KHUSUS MOBILE (320px hingga 480px) */
-/* ================================== */
+/* .new-rectangle1 */
+.new-rectangle1 {
+    position: absolute; top: 221px; left: 198px; 
+    transform: translate(750%, -50%); width: 70px; height: 100px;
+    border: 1px dashed red; background-color: rgba(0, 0, 255, 0.7); 
+    background-image: url('background-image2.jpg'); 
+}
 
-@media screen and (min-width: 320px) and (max-width: 480px) {
+/* .new-rectangle2 (Baru ditambahkan) */
+.new-rectangle2 {
+    position: absolute;
+    top: 221px; 
+    left: 278px; 
+	transform: translate(525%, -50%);
+    width: 100px;
+    height: 70px;
+    border: 2px solid darkgreen; 
+    background-color: rgba(0, 128, 0, 0.5); 
+    background-image: url('background-image3.jpg'); 
+}
+
+/* ======================================================== */
+/* 📱 MEDIA QUERY: Gaya KHUSUS MOBILE WEB (Layar hingga 600px) */
+/* Menggunakan Flexbox untuk penumpukan otomatis */
+/* ======================================================== */
+
+@media screen and (max-width: 600px) {
     
-    /* Styles untuk RECTANGLE 7 */
-    .rectangle-7 {
-        width: 80vw; /* Lebar 80% dari viewport */
-        height: 26.2vw; /* Tinggi Proporsional */
-        /* top: 0px; (Sudah diatur di luar media query) */
+    /* CONTAINER: Flexbox untuk penumpukan vertikal di tengah */
+    body {
+        display: flex; 
+        flex-direction: column; /* Tumpukan vertikal */
+        align-items: center; /* Rata tengah horizontal */
+        padding-top: 15px; 
     }
 
-    /* Styles untuk ELEMEN BARU */
+    /* ANAK ELEMEN: Reset positioning dan atur lebar/tinggi responsif */
+    .rectangle-7, .new-rectangle, .new-rectangle1, .new-rectangle2 { 
+        position: static; /* Mengabaikan position: absolute desktop */
+        transform: none;
+        left: unset;
+        top: unset; 
+        
+        width: 80vw; /* Semua mengambil 80% lebar layar */
+        margin-bottom: 15px; 
+    }
+
+    /* Tinggi Responsif */
+    .rectangle-7 {
+        height: 26.2vw; 
+    }
+
     .new-rectangle {
-        width: 80vw; /* Lebar disamakan dengan 80vw */
-        height: 56vw; /* Tinggi Proporsional */
-        top: 40vw; /* Jarak dari atas layar mobile */
+        height: 56vw;
+    }
+    
+    .new-rectangle1 {
+        height: 100px; /* Tinggi fixed */
+    }
+    
+    /* Tinggi Responsif untuk konsistensi */
+    .new-rectangle2 {
+        height: 56vw; /* 70/100 * 80vw = 56vw (Proporsional dengan lebar mobile) */
+        margin-bottom: 0; /* Elemen terakhir */
     }
 }
