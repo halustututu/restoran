@@ -4,7 +4,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     min-height: 100vh;
-    position: relative; /* Container untuk elemen position: absolute */
+    position: relative; 
     background-color: #f0f0f0; 
 }
 
@@ -12,7 +12,6 @@ body {
 /* 💻 STYLES DESKTOP (DEFAULT) - Menggunakan position: absolute */
 /* ================================== */
 
-/* .rectangle-7 */
 .rectangle-7 {
     width: 467px; height: 153px; top: 0px; left: 50%; 
     transform: translateX(-50%); position: absolute; background-color: #D9D9D9; 
@@ -20,79 +19,247 @@ body {
     background-size: cover; background-repeat: no-repeat; background-position: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
-/* .new-rectangle */
 .new-rectangle {
-    position: absolute; top: 221px; left: 138px; 
+    position: absolute; top: 250px; left: 128px; 
     transform: translate(475%, -50%); width: 100px; height: 70px;
     border: 1px solid black; opacity: 1; 
     background-color: rgba(255, 165, 0, 0.7);
     background-image: url('background-image1.jpg'); 
 }
-
-/* .new-rectangle1 */
 .new-rectangle1 {
-    position: absolute; top: 221px; left: 198px; 
+    position: absolute; top: 250px; left: 188px; 
     transform: translate(750%, -50%); width: 70px; height: 100px;
     border: 1px dashed red; background-color: rgba(0, 0, 255, 0.7); 
     background-image: url('background-image2.jpg'); 
 }
-
-/* .new-rectangle2 (Baru ditambahkan) */
 .new-rectangle2 {
     position: absolute;
-    top: 221px; 
-    left: 278px; 
+    top: 250px; left: 268px; width: 100px; height: 70px;
 	transform: translate(525%, -50%);
-    width: 100px;
-    height: 70px;
     border: 2px solid darkgreen; 
     background-color: rgba(0, 128, 0, 0.5); 
     background-image: url('background-image3.jpg'); 
 }
 
-/* ======================================================== */
-/* 📱 MEDIA QUERY: Gaya KHUSUS MOBILE WEB (Layar hingga 600px) */
-/* Menggunakan Flexbox untuk penumpukan otomatis */
-/* ======================================================== */
+/* ================================== */
+/* 🖼️ STYLES GALERI PRODUK */
+/* ================================== */
 
-@media screen and (max-width: 600px) {
+/* Mengatur teks "OUR PRODUCTS" agar ke tengah */
+.section-title {
+    text-align: center;
+    margin-top: 40px; /* Memberi jarak dari elemen di atasnya */
+    margin-bottom: 20px;
+    font-size: 16px; /* Ukuran font (opsional) */
+    color: #333; /* Warna font (opsional) */
+}
+
+/* 1. Container Pembungkus (Ini adalah Flexbox-nya) */
+.product-gallery {
+    display: flex;            /* Mengaktifkan mode Flexbox */
+    flex-wrap: wrap;          /* Izinkan item pindah ke baris baru jika tidak muat */
+    justify-content: center;  /* Pusatkan semua item secara horizontal */
+    gap: 20px;                /* Memberi jarak 20px antar item (lebih baik dari margin) */
+    padding: 0 20px;          /* Memberi sedikit padding di sisi kiri/kanan container */
+    max-width: 600px;         /* (Opsional) Batasi lebar maks galeri agar rapi */
+    margin: 0 auto;           /* Pusatkan galeri di tengah halaman */
+}
+
+/* 2. Item Produk Individual */
+.product-item {
+    width: 100px;             /* Sesuai permintaan Anda */
+    height: 105px;            /* Sesuai permintaan Anda */
     
-    /* CONTAINER: Flexbox untuk penumpukan vertikal di tengah */
-    body {
-        display: flex; 
-        flex-direction: column; /* Tumpukan vertikal */
-        align-items: center; /* Rata tengah horizontal */
-        padding-top: 15px; 
-    }
+    /* Styling Gambar Latar */
+    background-color: #777;   /* Warna cadangan jika gambar gagal dimuat */
+    background-size: cover;     /* Membuat gambar pas memenuhi kotak */
+    background-position: center; /* Posisi gambar di tengah */
 
-    /* ANAK ELEMEN: Reset positioning dan atur lebar/tinggi responsif */
-    .rectangle-7, .new-rectangle, .new-rectangle1, .new-rectangle2 { 
-        position: static; /* Mengabaikan position: absolute desktop */
-        transform: none;
-        left: unset;
-        top: unset; 
-        
-        width: 80vw; /* Semua mengambil 80% lebar layar */
-        margin-bottom: 15px; 
-    }
-
-    /* Tinggi Responsif */
-    .rectangle-7 {
-        height: 26.2vw; 
-    }
-
-    .new-rectangle {
-        height: 56vw;
-    }
+    /* Styling Tampilan */
+    border-radius: 8px;       /* Membuat sudutnya sedikit melengkung (seperti di gambar) */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan tipis */
     
-    .new-rectangle1 {
-        height: 100px; /* Tinggi fixed */
-    }
+    /* Penting untuk memposisikan teks di dalamnya */
+    position: relative; 
+    overflow: hidden;         /* Merapikan gambar agar tidak keluar dari border-radius */
+}
+
+/* 3. Teks di dalam Item Produk */
+.product-item span {
+    position: absolute;       /* Posisikan teks secara absolut di dalam .product-item */
+    bottom: 10px;             /* 10px dari bawah */
+    left: 0;                  /* Ratakan ke kiri... */
+    right: 0;                 /* ...dan ke kanan (ini trik untuk memusatkan) */
     
-    /* Tinggi Responsif untuk konsistensi */
-    .new-rectangle2 {
-        height: 56vw; /* 70/100 * 80vw = 56vw (Proporsional dengan lebar mobile) */
-        margin-bottom: 0; /* Elemen terakhir */
-    }
+    /* Styling Teks */
+    text-align: center;       /* Buat teks jadi ke tengah */
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Bayangan agar teks terbaca */
+}
+
+/* ================================== */
+/* 🔽 RECTANGLE BAWAH BARU */
+/* ================================== */
+
+.new-rectangle3 {
+    /* Spesifikasi dari Anda */
+    width: 467px;
+    height: 96px;
+    top: 650px;
+
+    /* Jawaban dari pertanyaan saya sebelumnya */
+    position: absolute;
+
+    /* Properti tambahan untuk memposisikannya di tengah,
+      mengikuti pola yang sama dengan .rectangle-7 Anda
+      (karena lebarnya sama-sama 467px)
+    */
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Styling agar terlihat */
+    background-color: #D9D9D9; /* Warna abu-abu seperti .rectangle-7 */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Bayangan seperti .rectangle-7 */
+}
+
+/* ================================== */
+/* 🔧 PERBAIKAN TATA LETAK UTAMA */
+/* ================================== */
+
+/* Hapus 'position: relative' agar body mengalir normal */
+body {
+    background-color: #ffffff; /* Ganti abu-abu jadi putih agar bersih */
+    min-height: auto;
+    position: static; /* Kembali ke default */
+}
+
+/* UBAH .rectangle-7 AGAR JADI HEADER YANG NORMAL 
+  Ini adalah perubahan terpenting.
+*/
+.rectangle-7 {
+    width: 467px; 
+    height: 153px; 
+    
+    /* HAPUS INI:
+    top: 0px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    position: absolute; 
+    */
+    
+    /* GANTI DENGAN INI: */
+    margin: 0 auto; /* Ini akan otomatis memusatkannya */
+    margin-top: 20px; /* Beri jarak sedikit di atas */
+
+    /* Sisanya biarkan sama */
+    background-color: #D9D9D9; 
+    background-image: url('background-image.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* ================================== */
+/* 🔽 RECTANGLE BAWAH BARU */
+/* ================================== */
+
+.bottom-rectangle {
+    /* Spesifikasi dari Anda */
+    width: 467px;
+    height: 96px;
+    top: 665px;
+
+    /* Jawaban dari pertanyaan saya sebelumnya */
+    position: absolute;
+
+    /* Properti tambahan untuk memposisikannya di tengah,
+      mengikuti pola yang sama dengan .rectangle-7 Anda
+      (karena lebarnya sama-sama 467px)
+    */
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Styling agar terlihat */
+    background-color: #D9D9D9; /* Warna abu-abu seperti .rectangle-7 */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Bayangan seperti .rectangle-7 */
+}
+
+/* Beri jarak antara galeri dan footer baru */
+main {
+    margin-bottom: 40px;
+}
+
+
+/* ================================== */
+/* 🦶 STYLING FOOTER BARU */
+/* ================================== */
+
+
+
+/* 1. Bagian Fitur (Abu-abu) */
+.footer-features {
+    background-color: #f0f0f0; /* Warna abu-abu muda dari gambar */
+    width: 427px;
+	height: 85px; 
+	padding: 40px 20px;
+}
+
+.feature-list {
+    display: flex;
+    flex-wrap: wrap; /* Izinkan membungkus ke baris baru di HP */
+    justify-content: center;
+    max-width: 900px; /* Batasi lebar agar rapi */
+    margin: 0 auto; /* Pusatkan di tengah */
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start; /* Ikon sejajar dengan awal teks */
+    flex-basis: 45%;      /* 2 kolom (sisakan sedikit ruang) */
+    min-width: 100px; /* Pastikan tidak terlalu sempit */
+}
+
+/* Ini adalah placeholder untuk ikon Anda */
+.feature-icon {
+    width: 27px;
+    height: 27px;
+    background-color: #d9534f; /* Warna merah dari gambar */
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Jangan biarkan ikon menyusut */
+    margin-right: 15px;
+}
+
+.feature-item p {
+    margin: 0;
+    font-size: 10px;
+    color: #333;
+}
+
+.bottom-rectangle1 {
+    /* Spesifikasi dari Anda */
+    width: 467px;
+    height: 96px;
+    top: 910px;
+
+    /* Jawaban dari pertanyaan saya sebelumnya */
+    position: absolute;
+
+    /* Properti tambahan untuk memposisikannya di tengah,
+      mengikuti pola yang sama dengan .rectangle-7 Anda
+      (karena lebarnya sama-sama 467px)
+    */
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Styling agar terlihat */
+    background-color: #D9D9D9; /* Warna abu-abu seperti .rectangle-7 */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Bayangan seperti .rectangle-7 */
 }
